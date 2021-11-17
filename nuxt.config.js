@@ -13,32 +13,65 @@ export default {
         link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
 
-    // Global CSS: https://go.nuxtjs.dev/config-css
     css: [],
 
-    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [],
+    router: {
+        middleware: ['auth'],
+    },
 
-    // Auto import components: https://go.nuxtjs.dev/config-components
+    plugins: [{ src: '~/plugins/axios.js' }],
+
     components: true,
 
-    // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: [
-        // https://go.nuxtjs.dev/eslint
-        '@nuxtjs/eslint-module',
-        // https://go.nuxtjs.dev/tailwindcss
-        '@nuxtjs/tailwindcss',
-    ],
+    buildModules: ['@nuxtjs/tailwindcss'],
 
-    // Modules: https://go.nuxtjs.dev/config-modules
-    modules: [
-        // https://go.nuxtjs.dev/axios
-        '@nuxtjs/axios',
-    ],
+    modules: ['@nuxtjs/axios', '@nuxtjs/auth-next', '@nuxtjs/toast'],
 
-    // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    axios: {},
+    axios: {
+        baseURL: process.env.API_URL,
+    },
 
-    // Build Configuration: https://go.nuxtjs.dev/config-build
-    build: {},
+    auth: {
+        localStorage: false,
+
+        cookie: {
+            options: {
+                maxAge: 31536000, // 1 year
+                secure: process.env.COOKIE_SECURE,
+            },
+        },
+
+        redirect: {
+            login: '/login',
+            logout: '/',
+            home: '/',
+        },
+
+        strategies: {
+            local: {
+                token: {
+                    property: 'token',
+                    maxAge: 31536000, // 1 year
+                },
+
+                user: {
+                    property: 'data',
+                },
+
+                endpoints: {
+                    login: { url: '/auth/login', method: 'post' },
+                    logout: { url: '/auth/logout', method: 'post' },
+                    user: { url: '/auth/user', method: 'get' },
+                },
+            },
+        },
+    },
+
+    toast: {
+        position: 'top-center',
+        duration: 5000,
+        singleton: true,
+    },
+
+    build: { extractCSS: true },
 };

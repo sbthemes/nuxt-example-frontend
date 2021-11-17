@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .form-input,
+    .form-textarea,
+    .form-select,
+    .form-multiselect {
+        @apply w-full px-4 rounded text-base font-normal mb-4;
+    }
+
+    /* Buttons */
+    .btn {
+        @apply text-white bg-gray-900 text-sm py-2.5 px-5 rounded-md hover:opacity-80;
+    }
+    .btn:disabled {
+        @apply opacity-50 pointer-events-none;
+    }
+}
+
+
+/* toasted */
+.toasted-container .toasted {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 8px 20px 10px !important;
+    line-height: 1.5 !important;
+    text-align: center;
+}
+@media (min-width: 601px) {
+    .toasted-container .toasted {
+        border-radius: 0.25rem !important;
+    }
+}
+.toasted-container.top-center {
+    top: 0 !important;
+}
+.toasted-container a[href] {
+    color: inherit;
+    text-decoration: underline;
+    margin: 0 5px;
+    font-weight: 700;
+}
+.toasted-container a[href]:hover {
+    text-decoration: none;
+}
+.toasted .primary.error,
+.toasted.toasted-primary.error {
+    @apply !bg-[red];
+}
+.toasted .primary.success,
+.toasted.toasted-primary.success {
+    @apply !bg-[green];
+}
