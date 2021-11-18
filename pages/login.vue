@@ -10,7 +10,8 @@
                 <label>Password</label>
                 <input v-model="loginParams.password" type="text" class="form-input" />
             </div>
-            <div class="text-right">
+            <div class="flex items-center justify-between">
+                <nuxt-link to="/forgot-password">Forgot Password</nuxt-link>
                 <button type="submit" class="btn">Login</button>
             </div>
         </form>
@@ -33,7 +34,7 @@
         methods: {
             async login() {
                 try {
-                    const response = await this.$auth.loginWith('local', { data: this.loginParams });
+                    await this.$auth.loginWith('local', { data: this.loginParams });
                 } catch {}
             },
         },
