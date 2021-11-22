@@ -35,6 +35,7 @@ export default {
         localStorage: false,
 
         cookie: {
+            prefix: process.env.COOKIE_PREFIX,
             options: {
                 maxAge: 31536000, // 1 year
                 secure: process.env.COOKIE_SECURE,

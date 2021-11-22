@@ -2,6 +2,7 @@
 
 - Clone this repo
 - copy .env.example to .env
+- Set all env options based on project name
 
 ## This repo includes
 - Tailwind
