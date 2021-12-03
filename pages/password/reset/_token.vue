@@ -19,6 +19,10 @@
 
 <script>
     export default {
+        validate({ params }) {
+            return !!params.token;
+        },
+
         auth: 'guest',
 
         data() {
